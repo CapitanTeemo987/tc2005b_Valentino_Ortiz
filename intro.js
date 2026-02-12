@@ -33,9 +33,13 @@ console.info("Personaje favorito " + personaje_favorito)
 
 const hoy_hay_juego = confirm("Hay juegito?")
 if(hoy_hay_juego){
-    console.warn("A jugar")
+    descargar();
 }else{
     console.info("Buen día")
 }
 
 //funciones tradicionales
+function descargar() {
+    window.location.href = "https://www.leagueoflegends.com/es-mx/"
+}
+
