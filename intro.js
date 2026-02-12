@@ -53,3 +53,24 @@ document.getElementById("boton_desinstalar").onclick = () => {
 const inicial_partida = () => {
     alert("Iniciar partida")
 }
+
+//arreglos 
+
+const personajes = ["Fizz"]
+
+const arreglo2 = new Array();
+personajes.push = "Irelia"
+personajes[10] = "Leona"
+personajes["Hola"] = "Lux"
+
+for(let per in personajes){
+    console.log(per)
+}
+
+//Objetos
+
+const eco_de_Luden = {
+    nombre: "Eco de Luden",
+    color: "morado",
+    daño: 100
+}
