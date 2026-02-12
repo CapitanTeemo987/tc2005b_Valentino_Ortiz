@@ -43,3 +43,13 @@ function descargar() {
     window.location.href = "https://www.leagueoflegends.com/es-mx/"
 }
 
+//funciones modernas
+() => {}
+
+document.getElementById("boton_desinstalar").onclick = () => {
+    alert("jojojo no se puede desinstalar")
+}
+
+const inicial_partida = () => {
+    alert("Iniciar partida")
+}
