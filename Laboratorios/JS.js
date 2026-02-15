@@ -1,4 +1,4 @@
-document.write("<hr><h2>JavaScript</h2>");
+document.write('<hr><h2 class="text-center text-[#703d56]">JavaScript</h2>');
 const num = prompt("Ingresa un número para generar la tabla de cuadrados y cubos:");
 document.write("<h4>Ejercicio 1: Tabla de potencias</h4>");
 document.write("<table border='1'><tr><th>Número</th><th>Cuadrado</th><th>Cubo</th></tr>");
