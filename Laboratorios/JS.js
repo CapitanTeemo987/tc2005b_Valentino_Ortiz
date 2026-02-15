@@ -83,7 +83,7 @@ function ejecutarPruebas() {
     console.assert(res3.ceros === 2, "Error Ej 3: Ceros incorrectos");
     console.assert(res3.positivos === 2, "Error Ej 3: Positivos incorrectos");
     
-    htmlContent += `<p><strong>Ej 3 (Contador):</strong> Negativos: ${res3.negativos}, Ceros: ${res3.ceros}, Positivos: ${res3.positivos}</p>`;
+    htmlContent += `<p><strong>Ej 3:</strong> Negativos: ${res3.negativos}, Ceros: ${res3.ceros}, Positivos: ${res3.positivos}</p>`;
 
     const matrizTest = [[10, 8, 9], [10, 10], [0, 6]];
     const res4 = promedios(matrizTest);
@@ -92,12 +92,12 @@ function ejecutarPruebas() {
     console.assert(res4[1] === 10, "Error Ej 4: Promedio fila 1 incorrecto");
     console.assert(res4[2] === 3, "Error Ej 4: Promedio fila 2 incorrecto");
     
-    htmlContent += `<p><strong>Ej 4 (Promedios):</strong> Resultados: [${res4.join(", ")}]</p>`;
+    htmlContent += `<p><strong>Ej 4:</strong> Resultados: [${res4.join(", ")}]</p>`;
 
     const res5 = inverso(1234);
     console.assert(res5 === 4321, "Error Ej 5: Inverso de 1234 incorrecto");
     
-    htmlContent += `<p><strong>Ej 5 (Inverso):</strong> El inverso de 1234 es ${res5}</p>`;
+    htmlContent += `<p><strong>Ej 5:</strong> El inverso de 1234 es ${res5}</p>`;
 
     const miCampeon = new Campeon("Jhin", "Tirador", 100);
     const daño = miCampeon.calcularDaño(4); 
