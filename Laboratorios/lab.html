@@ -87,6 +87,42 @@
                 <dt>¿Qué implicaciones tiene utilizar variables globales dentro de funciones?</dt>
                 <dd>- Una funcion puede cambiar el valor de la variable, se puede confundir si se intenta usa con otra funcion que no sea la establecida, si la variable cambia, es dificil saber que funcion fue la que la cambio</dd>
             </dl>          
+            <div id="js-document-write-output" class="font-sans max-w-4xl mx-auto"></div>
+
+            <section id="seccion-pruebas" class="font-sans max-w-4xl mx-auto">
+                <h2 class="text-xl text-center text-[#703d56]">Resultados de Funciones</h2>
+                <div id="output-pruebas"></div>
+            </section>
+            <!--es el lab6 el comparador de contraseñas-->
+            <hr class="my-4">
+
+            <section id="seccion-validador" class="font-sans max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+                <h2 class="text-xl text-center text-[#703d56] font-bold mb-4">Validador de contraseña</h2>
+                
+                <div class="max-w-xs mx-auto space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Nueva Contraseña</label>
+                        <input type="password" id="pass1" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
+                        
+                        <div class="w-full bg-gray-200 h-2 mt-2 rounded-full overflow-hidden">
+                            <div id="fuerza-barra" class="h-full w-0 transition-all duration-300"></div>
+                        </div>
+                        <p id="fuerza-texto" class="text-xs mt-1 text-gray-500 italic text-right">Fuerza: Muy débil</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700">Confirmar Contraseña</label>
+                        <input type="password" id="pass2" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
+                    </div>
+
+                    <p id="mensaje-coincidencia" class="text-sm font-bold text-center h-5"></p>
+
+                    <button id="btn-validar" class="w-full bg-[#703d56] text-white py-2 rounded font-bold hover:bg-[#be12b6] transition">
+                        Validar Seguridad
+                    </button>
+                </div>
+            </section>
+
         </main>
         <hr class="my-4">
         <footer class="font-sans">
@@ -99,10 +135,6 @@
             <a class="text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://code.visualstudio.com/" target="_blank">Visual studio code</a>
         </footer>
         <hr class="my-4">
-        <section id="seccion-pruebas">
-            <h2 class="text-xl text-center text-[#703d56]">Resultados de Funciones</h2>
-            <div id="output-pruebas"></div>
-        </section>
         <script src="JS.js"></script>
     </body>
 </html>

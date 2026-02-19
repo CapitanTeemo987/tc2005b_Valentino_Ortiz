@@ -1,11 +1,15 @@
-document.write('<hr><h2 class="text-center text-[#703d56]">JavaScript</h2>');
+const container = document.getElementById("js-document-write-output");
+let tableHtml = '<br><h2 class="text-xl text-center text-[#703d56]">JavaScript</h2>';
+
 const num = prompt("Ingresa un número para generar la tabla de cuadrados y cubos:");
-document.write("<h4>Ejercicio 1: Tabla de potencias</h4>");
-document.write("<table border='1'><tr><th>Número</th><th>Cuadrado</th><th>Cubo</th></tr>");
+tableHtml += "<h4>Ejercicio 1: Tabla de potencias</h4>";
+tableHtml += "<table border='1' class=' mx-auto mb-4'><tr><th>Número</th><th>Cuadrado</th><th>Cubo</th></tr>";
+
 for (let i = 1; i <= num; i++) {
-        document.write(`<tr><td>${i}</td><td>${i ** 2}</td><td>${i ** 3}</td></tr>`);
-    }
-document.write("</table><hr>");
+    tableHtml += `<tr><td>${i}</td><td>${i ** 2}</td><td>${i ** 3}</td></tr>`;
+}
+tableHtml += "</table>";
+container.innerHTML = tableHtml;
 
 const n1 = Math.floor(Math.random() * 100);
 const n2 = Math.floor(Math.random() * 100);
@@ -114,3 +118,55 @@ function ejecutarPruebas() {
 }
 
 ejecutarPruebas();
+
+const p1 = document.getElementById('pass1');
+const p2 = document.getElementById('pass2');
+const barra = document.getElementById('fuerza-barra');
+const textoFuerza = document.getElementById('fuerza-texto');
+const mensaje = document.getElementById('mensaje-coincidencia');
+
+p1.oninput = () => {
+    let v = p1.value;
+    let f = 0;
+
+    if (v.length >= 8) f += 25;           // Longitud mínima
+    if (/[A-Z]/.test(v)) f += 25;         // Mayúsculas
+    if (/[0-9]/.test(v)) f += 25;         // Números
+    if (/[^A-Za-z0-9]/.test(v)) f += 25;  // Especiales
+
+    barra.style.width = f + "%";
+    
+    if (f <= 25) {
+        barra.className = "h-full bg-red-500";
+        textoFuerza.innerText = "Fuerza: Débil";
+    } else if (f <= 75) {
+        barra.className = "h-full bg-yellow-500";
+        textoFuerza.innerText = "Fuerza: Media";
+    } else {
+        barra.className = "h-full bg-green-500";
+        textoFuerza.innerText = "Fuerza: Segura";
+    }
+    revisarIguales();
+};
+
+function revisarIguales() {
+    if (p1.value === p2.value && p1.value !== "") {
+        mensaje.innerText = "Coinciden";
+        mensaje.className = "text-sm font-bold text-center text-green-600";
+    } else if (p2.value !== "") {
+        mensaje.innerText = "No coinciden";
+        mensaje.className = "text-sm font-bold text-center text-red-600";
+    } else {
+        mensaje.innerText = "";
+    }
+}
+
+p2.oninput = revisarIguales;
+
+document.getElementById('btn-validar').onclick = () => {
+    if (p1.value === p2.value && p1.value.length >= 8) {
+        alert("Password validado correctamente.");
+    } else {
+        alert("Por favor, verifica que las contraseñas coincidan y tengan al menos 8 caracteres.");
+    }
+};
