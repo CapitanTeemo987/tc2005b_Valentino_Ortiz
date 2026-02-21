@@ -16,7 +16,7 @@
         <main class="font-sans max-w-4xl mx-auto">
             <a class="block mx-auto w-fit text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://www.w3schools.com/html/html_basic.asp" target="_blank"> Esto es un enlace</a>
             <br>
-            <img id="imagenPresentacion" class=" mx-auto border-black rounded-lg my-[10px]" src="https://preview.redd.it/old-league-of-legends-art-as-posters-v0-0iw2kxwp1fee1.jpg?width=1080&crop=smart&auto=webp&s=076db3427c43651c6367ebfee566cb1b734a4734" alt="imagen de lol" height="420" width="640">
+            <img id="imagenPresentacion" class="cursor-pointer mx-auto border-black rounded-lg my-[10px]" src="https://preview.redd.it/old-league-of-legends-art-as-posters-v0-0iw2kxwp1fee1.jpg?width=1080&crop=smart&auto=webp&s=076db3427c43651c6367ebfee566cb1b734a4734" alt="imagen de lol" height="420" width="640">
             <p>Una de mis principales aficiones es jugar League of Legends, actualmente llevo jugando 6 años, me gusta que el juego dependa mucho de estrategias y no solo de habilidad, se necesita mucha comunicación en equipo para lograr ganar</p>
             <hr class="my-4">
             <h2 class="text-xl text-center text-[#703d56]">Preguntas HTML</h2>
@@ -93,20 +93,16 @@
                 <h2 class="text-xl text-center text-[#703d56]">Resultados de Funciones</h2>
                 <div id="output-pruebas"></div>
             </section>
-            <!--es el lab6 el comparador de contraseñas-->
             <hr class="my-4">
 
             <section id="seccion-validador" class="font-sans max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-                <h2 class="text-xl text-center text-[#703d56] font-bold mb-4">Validador de contraseña</h2>
+                <h2 id="titulo-validador" class="text-xl text-center text-[#703d56] font-bold mb-4">Validador de contraseña</h2>
                 
                 <div class="max-w-xs mx-auto space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700">Nueva Contraseña</label>
                         <input type="password" id="pass1" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
-                        
-                        <div class="w-full bg-gray-200 h-2 mt-2 rounded-full overflow-hidden">
-                            <div id="fuerza-barra" class="h-full w-0 transition-all duration-300"></div>
-                        </div>
+                        <p id="ayuda-dinamica" class="text-[10px] text-blue-600 font-medium mt-1 h-4 transition-opacity duration-300 opacity-0"></p>
                         <p id="fuerza-texto" class="text-xs mt-1 text-gray-500 italic text-right">Fuerza: Muy débil</p>
                     </div>
 

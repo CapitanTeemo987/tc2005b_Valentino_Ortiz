@@ -121,7 +121,6 @@ ejecutarPruebas();
 
 const p1 = document.getElementById('pass1');
 const p2 = document.getElementById('pass2');
-const barra = document.getElementById('fuerza-barra');
 const textoFuerza = document.getElementById('fuerza-texto');
 const mensaje = document.getElementById('mensaje-coincidencia');
 
@@ -129,22 +128,20 @@ p1.oninput = () => {
     let v = p1.value;
     let f = 0;
 
-    if (v.length >= 8) f += 25;           // Longitud mínima
-    if (/[A-Z]/.test(v)) f += 25;         // Mayúsculas
-    if (/[0-9]/.test(v)) f += 25;         // Números
-    if (/[^A-Za-z0-9]/.test(v)) f += 25;  // Especiales
+    if (v.length >= 8) f += 25;           
+    if (/[A-Z]/.test(v)) f += 25;         
+    if (/[0-9]/.test(v)) f += 25;         
+    if (/[^A-Za-z0-9]/.test(v)) f += 25;  
 
-    barra.style.width = f + "%";
-    
     if (f <= 25) {
-        barra.className = "h-full bg-red-500";
         textoFuerza.innerText = "Fuerza: Débil";
+        textoFuerza.className = "text-xs mt-1 text-red-500 italic text-right";
     } else if (f <= 75) {
-        barra.className = "h-full bg-yellow-500";
         textoFuerza.innerText = "Fuerza: Media";
+        textoFuerza.className = "text-xs mt-1 text-yellow-600 italic text-right";
     } else {
-        barra.className = "h-full bg-green-500";
         textoFuerza.innerText = "Fuerza: Segura";
+        textoFuerza.className = "text-xs mt-1 text-green-600 italic text-right";
     }
     revisarIguales();
 };
@@ -170,3 +167,54 @@ document.getElementById('btn-validar').onclick = () => {
         alert("Por favor, verifica que las contraseñas coincidan y tengan al menos 8 caracteres.");
     }
 };
+
+const titulo = document.getElementById('titulo-validador');
+
+titulo.onmouseenter = () => {
+    titulo.style.color = "#be12b6";      
+    titulo.style.letterSpacing = "4px";  
+    titulo.style.transform = "scale(1.1)"; 
+    titulo.style.fontStyle = "italic";   
+};
+
+titulo.onmouseleave = () => {
+    titulo.style.color = "#703d56";      
+    titulo.style.letterSpacing = "normal";
+    titulo.style.transform = "scale(1)";
+    titulo.style.fontStyle = "normal";
+};
+
+const imagenLoL = document.getElementById('imagenPresentacion');
+
+imagenLoL.onclick = () => {
+    if (imagenLoL.width === 640) {
+        imagenLoL.style.width = "800px";
+        imagenLoL.style.border = "5px solid #be12b6"; 
+    } else {
+        imagenLoL.style.width = "640px";
+        imagenLoL.style.border = "none";
+    }
+};
+
+const campoPass = document.getElementById('pass1');
+const ayudaTexto = document.getElementById('ayuda-dinamica');
+
+const consejos = [
+    "Tip: Usa una combinación de letras y símbolos.",
+    "Dato: Las contraseñas largas son más difíciles de hackear.",
+    "Recuerda: No uses fechas de nacimiento.",
+    "Tip: ¡Mezclar mayúsculas ayuda mucho!",
+    "Seguridad: Evita usar la misma clave en varios sitios."
+];
+
+campoPass.onfocus = () => {
+    const indiceAleatorio = Math.floor(Math.random() * consejos.length);
+    ayudaTexto.innerText = consejos[indiceAleatorio];
+    ayudaTexto.style.opacity = "1"; 
+};
+
+campoPass.onblur = () => {
+    ayudaTexto.style.opacity = "0"; 
+};
+
+console.log(Math.random());
