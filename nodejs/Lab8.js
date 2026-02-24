@@ -204,7 +204,7 @@ const server = http.createServer((request, response) => {
     } else if(request.method === "GET"){
         response.setHeader('Content-Type', 'text/html');
         if (request.url === "/") {
-            response.write("<h1>Bienvenido a mi servidor de Node</h1><p>Ve a /lab para ver el laboratorio.</p>");
+            response.write("<h1>Bienvenido a mi servidor de Node</h1><p>Ve a /lab para ver el laboratorio.</p><p>Ve a /password para guardar una password.</p>");
         } else if (request.url === "/lab") {
             response.write(htmlHead + htmlLab); 
         } else if (request.url === "/password"){
