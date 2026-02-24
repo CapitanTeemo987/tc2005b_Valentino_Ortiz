@@ -15,7 +15,7 @@ console.log("El promedio es: " + promedio(arreglo));
 
 const fs = require('fs');
 
-const text = "Hola, esoty haciendo el laboratorio 6"
+const text = "Hola, esoty haciendo el laboratorio 8"
 function archivo(nombre, texto){
     fs.writeFileSync(nombre, texto);
 }
@@ -170,27 +170,18 @@ const htmlLab = `
 
 const htmlValidador = `
             <section id="seccion-validador" class="font-sans max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-                <h2 id="titulo-validador" class="text-xl text-center text-[#703d56] font-bold mb-4">Validador de contraseña</h2>
+                <h2 id="titulo-validador" class="text-xl text-center text-[#703d56] font-bold mb-4">Contraseña</h2>
                 
-                <div class="max-w-xs mx-auto space-y-4">
+                <form action="/password" method="POST" class="max-w-xs mx-auto space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700">Nueva Contraseña</label>
-                        <input type="password" id="pass1" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
-                        <p id="ayuda-dinamica" class="text-[10px] text-blue-600 font-medium mt-1 h-4 transition-opacity duration-300 opacity-0"></p>
-                        <p id="fuerza-texto" class="text-xs mt-1 text-gray-500 italic text-right">Fuerza: Muy débil</p>
+                        <input type="password" id="pass1" name="pass1" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700">Confirmar Contraseña</label>
-                        <input type="password" id="pass2" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
-                    </div>
-
-                    <p id="mensaje-coincidencia" class="text-sm font-bold text-center h-5"></p>
-
-                    <button id="btn-validar" class="w-full bg-[#703d56] text-white py-2 rounded font-bold hover:bg-[#be12b6] transition">
-                        Validar Seguridad
+                    <button type="submit" id="btn-validar" class="w-full bg-[#703d56] text-white py-2 rounded font-bold hover:bg-[#be12b6] transition">
+                        Enviar y guardar
                     </button>
-                </div>
+                </form>
             </section>`
 
 const http = require('http')
@@ -199,19 +190,31 @@ const server = http.createServer((request, response) => {
     console.log(request);
     console.log(request.url);
     console.log(response);
-    response.setHeader('Content-Type', 'text/html');
-    if (request.url === "/") {
-        response.write("<h1>Bienvenido a mi servidor de Node</h1><p>Ve a /lab para ver el laboratorio.</p>");
-    } else if (request.url === "/lab") {
-        response.write(htmlHead + htmlLab); 
-    } else if (request.url === "/validador"){
-        response.write(htmlHead + htmlValidador);
-    }else {
-        response.statusCode = 404;
-        response.write("<h1>404: Not Found</h1><p>Esta pagina no existe.</p>");
-    }
-    response.end();
 
+    if(request.method === "POST" && request.url === "/password"){
+        const cuerpo = [];
+        request.on('data', (data) => {cuerpo.push(data)});
+        request.on('end', () => {
+            const cuerpoCompleto = Buffer.concat(cuerpo).toString();
+            fs.appendFileSync('contraseña', cuerpoCompleto + '\n');
+            response.setHeader('Content-Type', 'text/html');
+            response.write("<h1>Password guardada</h1><a href='/password'>Regresar</a>");
+            response.end();
+        })
+    } else if(request.method === "GET"){
+        response.setHeader('Content-Type', 'text/html');
+        if (request.url === "/") {
+            response.write("<h1>Bienvenido a mi servidor de Node</h1><p>Ve a /lab para ver el laboratorio.</p>");
+        } else if (request.url === "/lab") {
+            response.write(htmlHead + htmlLab); 
+        } else if (request.url === "/password"){
+            response.write(htmlHead + htmlValidador);
+        }else {
+            response.statusCode = 404;
+            response.write("<h1>404: Not Found</h1><p>Esta pagina no existe.</p>");
+        }
+        response.end();
+     }
 }) 
 
 server.listen(3000)
