@@ -1,0 +1,19 @@
+{
+  "name": "tc2005b_valentino_ortiz",
+  "version": "1.0.0",
+  "description": "laboratorio lol",
+  "main": "intro.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CapitanTeemo987/tc2005b_Valentino_Ortiz/tree/main"
+  },
+  "keywords": [
+    "node",
+    "lol"
+  ],
+  "author": "Valentino Ortiz",
+  "license": "ISC"
+}
