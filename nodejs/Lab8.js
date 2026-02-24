@@ -43,16 +43,16 @@ const resultado = analizarFrecuencia(textoLaboratorio);
 console.log("Resultado del analisis");
 console.table(resultado);
 
-
-const html = `<!DOCTYPE html>
+const htmlHead = `<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Laboratorio 1 - Valentino</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    </head>
+    </head>`
 
+const htmlLab = `
     <body>
         <header class="font-sans text-center">
             <h1 class="text-3xl font-bold">Este es el Laboratorio 1</h1>
@@ -150,7 +150,25 @@ const html = `<!DOCTYPE html>
                 <div id="output-pruebas"></div>
             </section>
             <hr class="my-4">
+        </main>
+        <hr class="my-4">
+        <footer class="font-sans">
+            <h2 class="text-xl text-center text-[#703d56]">Referencias</h2>
+            <p>freeCodeCamp. (2022, 26 enero). HTTP Request Methods  Get vs Put vs Post Explained with Code Examples. freeCodeCamp.org. https://www.freecodecamp.org/news/http-request-methods-explained/</p>
+            <p>W3Schools.com. (s.f.). https://www.w3schools.com/html/</p>
+            <p>Guerrero, A. C., & Guerrero, A. C. (2015, 20 julio). Ciclo de vida de un sistema de información. Gestiopolis. https://www.gestiopolis.com/ciclo-de-vida-de-un-sistema-de-informacion/</p>
+            <p>W3Schools.com. (s.f.-b). https://www.w3schools.com/html/html_tables.asp</p>
+            <p>Gemini. (2026). Asistente de Inteligencia Artificial de Google. Basado en el modelo Gemini 3 Flash.</p>
+            <p>Installing with Vite - Installation. (s. f.). Tailwind CSS. https://tailwindcss.com/docs/installation/using-vite</p>
+            <h2 class="text-xl text-center text-[#703d56]">Editor utilizado</h2>
+            <a class="text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://code.visualstudio.com/" target="_blank">Visual studio code</a>
+        </footer>
+        <hr class="my-4">
+        <script src="JS.js"></script>
+    </body>
+</html>`;
 
+const htmlValidador = `
             <section id="seccion-validador" class="font-sans max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-100">
                 <h2 id="titulo-validador" class="text-xl text-center text-[#703d56] font-bold mb-4">Validador de contraseña</h2>
                 
@@ -173,25 +191,7 @@ const html = `<!DOCTYPE html>
                         Validar Seguridad
                     </button>
                 </div>
-            </section>
-
-        </main>
-        <hr class="my-4">
-        <footer class="font-sans">
-            <h2 class="text-xl text-center text-[#703d56]">Referencias</h2>
-            <p>freeCodeCamp. (2022, 26 enero). HTTP Request Methods  Get vs Put vs Post Explained with Code Examples. freeCodeCamp.org. https://www.freecodecamp.org/news/http-request-methods-explained/</p>
-            <p>W3Schools.com. (s.f.). https://www.w3schools.com/html/</p>
-            <p>Guerrero, A. C., & Guerrero, A. C. (2015, 20 julio). Ciclo de vida de un sistema de información. Gestiopolis. https://www.gestiopolis.com/ciclo-de-vida-de-un-sistema-de-informacion/</p>
-            <p>W3Schools.com. (s.f.-b). https://www.w3schools.com/html/html_tables.asp</p>
-            <p>Gemini. (2026). Asistente de Inteligencia Artificial de Google. Basado en el modelo Gemini 3 Flash.</p>
-            <p>Installing with Vite - Installation. (s. f.). Tailwind CSS. https://tailwindcss.com/docs/installation/using-vite</p>
-            <h2 class="text-xl text-center text-[#703d56]">Editor utilizado</h2>
-            <a class="text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://code.visualstudio.com/" target="_blank">Visual studio code</a>
-        </footer>
-        <hr class="my-4">
-        <script src="JS.js"></script>
-    </body>
-</html>`;
+            </section>`
 
 const http = require('http')
 
@@ -203,8 +203,10 @@ const server = http.createServer((request, response) => {
     if (request.url === "/") {
         response.write("<h1>Bienvenido a mi servidor de Node</h1><p>Ve a /lab para ver el laboratorio.</p>");
     } else if (request.url === "/lab") {
-        response.write(html); 
-    } else {
+        response.write(htmlHead + htmlLab); 
+    } else if (request.url === "/validador"){
+        response.write(htmlHead + htmlValidador);
+    }else {
         response.statusCode = 404;
         response.write("<h1>404: Not Found</h1><p>Esta pagina no existe.</p>");
     }
