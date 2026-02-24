@@ -4,6 +4,7 @@
   "description": "laboratorio lol",
   "main": "intro.js",
   "scripts": {
+    "start": "node nodejs/Lab 8.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
     "lol"
   ],
   "author": "Valentino Ortiz",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
