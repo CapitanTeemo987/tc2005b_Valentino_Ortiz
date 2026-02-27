@@ -191,11 +191,11 @@ router.get('/completo', (request, response) => {
     response.send(htmlHead + htmlLab + htmlFooter);
 });
 
-router.get('/preguntas-html', (require, response) => {
+router.get('/preguntas-html', (request, response) => {
     response.send(htmlHead + preguntashtml + htmlFooter)
 });
 
-router.get('/preguntas-css', (require, response) => {
+router.get('/preguntas-css', (request, response) => {
     response.send(htmlHead + preguntascss + htmlFooter)
 });
 

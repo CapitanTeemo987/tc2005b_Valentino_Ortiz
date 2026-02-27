@@ -17,7 +17,7 @@ const htmlValidador = `
         <section id="seccion-validador" class="font-sans max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-100">
             <h2 id="titulo-validador" class="text-xl text-center text-[#703d56] font-bold mb-4">Contraseña</h2>
             
-            <form action="/password" method="POST" class="max-w-xs mx-auto space-y-4">
+            <form action="/auth/password" method="POST" class="max-w-xs mx-auto space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700">Nueva Contraseña</label>
                     <input type="password" id="pass1" name="pass1" class="w-full p-2 border border-gray-300 rounded mt-1 focus:ring-2 focus:ring-[#be12b6] outline-none">
@@ -35,7 +35,7 @@ const htmlFooter = `
 `
 ;
 
-router.get('/password', (requiest, response) => {
+router.get('/password', (request, response) => {
     response.send(htmlHead + htmlValidador + htmlFooter)
 });
 
