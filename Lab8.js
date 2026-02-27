@@ -11,7 +11,7 @@ app.use('/lab', rutasLab);
 app.use('/auth', rutasForm);
 
 app.get('/', (request, response) => {
-    response.send('<h1>Lab 11</h1><p>Usa /lab/ejercicios o /auth/password</p>');
+    response.send('<h1>Lab 11</h1><p>Usa /lab/completo - /lab/preguntas-html /lab/preguntas-css o /auth/password - /auth/status</p>');
 });
 
 app.use((request, response) => {

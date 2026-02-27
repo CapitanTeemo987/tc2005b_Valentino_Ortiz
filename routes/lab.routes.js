@@ -24,58 +24,6 @@ const htmlLab = `
             <img id="imagenPresentacion" class="cursor-pointer mx-auto border-black rounded-lg my-[10px]" src="https://preview.redd.it/old-league-of-legends-art-as-posters-v0-0iw2kxwp1fee1.jpg?width=1080&crop=smart&auto=webp&s=076db3427c43651c6367ebfee566cb1b734a4734" alt="imagen de lol" height="420" width="640">
             <p>Una de mis principales aficiones es jugar League of Legends, actualmente llevo jugando 6 años, me gusta que el juego dependa mucho de estrategias y no solo de habilidad, se necesita mucha comunicación en equipo para lograr ganar</p>
             <hr class="my-4">
-            <h2 class="text-xl text-center text-[#703d56]">Preguntas HTML</h2>
-            <dl>
-                <dt>¿Cuál es la diferencia entre Internet y la World Wide Web?</dt>
-                <dd>- Internet es la infraestructura, y la World Wide Web es un servicio que corre en internet</dd><br>
-                <dt>¿Cuáles son las partes de un URL?</dt>
-                <dd>- Protocolo: "HTTPS://"</dd>
-                <dd>- Dominio: "google.com"</dd>
-                <dd>- Path: "search"</dd>
-                <dd>- Parametros</dd><br>
-                <dt>¿Cuál es el propósito de los métodos HTTP: GET, HEAD, POST, PUT, PATCH, DELETE?</dt>
-                <dd>- GET solicita datos de un recurso específico</dd>
-                <dd>- HEAD igual que GET, pero solo pide los encabezados</dd>
-                <dd>- POST envía datos para que el servidor los procese</dd>
-                <dd>- PUT reemplaza un recurso existente por completo con los nuevos datos</dd>
-                <dd>- PATCH modifica parte de un recurso</dd>
-                <dd>- DELETE elimina el recurso especificado</dd><br>
-                <dt>¿Qué método HTTP se debe utilizar al enviar un formulario HTML, por ejemplo cuando ingresas tu usuario y contraseña en algún sitio? ¿Por qué?</dt>   
-                <dd>- Método POST, ya que este nos sirve para enviar datos al servidor</dd><br>
-                <dt>¿Qué método HTTP se utiliza cuando a través de un navegador web se accede a una página a través de un URL?</dt>
-                <dd>- El método GET</dd><br>
-                <dt>Un servidor web devuelve una respuesta HTTP con código 200. ¿Qué significa esto? ¿Ocurrió algún error?</dt>
-                <dd>Significa que todo salio bien</dd><br>
-                <dt>¿Es responsabilidad del desarrollador corregir un sitio web si un usuario reporta que intentó acceder al sitio y se encontró con un error 404? ¿Por qué?</dt>
-                <dd>- Sí, ya que si se encuentra en esa situación significa que el desarrollador borró o cambió algun archivo</dd><br>
-                <dt>¿Es responsabilidad del desarrollador corregir un sitio web si un usuario reporta que intentó acceder al sitio y se encontró con un error 500? ¿Por qué?</dt>
-                <dd>- Sí, ya que es un error interno del servidor, osea que algo del backend falló</dd><br>
-                <dt>¿Qué significa que un atributo HTML5 esté depreciado o desaprobado (deprecated)? Menciona algunos elementos de HTML 4 que en HTML5 estén desaprobados.</dt>
-                <dd>- Significa que el atributo aun funciona pero en el futuro tal vez ya no. Ejemplos de HTML4 son center o font</dd><br>
-                <dt>¿Cuáles son las diferencias principales entre HTML 4 y HTML5?</dt>
-                <dd>- En HTML5 se introdujeron nuevas etiquetas como header o footer y soporte para audio y video nativo</dd><br>
-                <dt>¿Qué componentes de estructura y estilo tiene una tabla?</dt>
-                <dd>- Estructura: table, thead, tbofy, tfoot</dd>
-                <dd>- Estilo: padding, cellspacing, border-collapse</dd><br>
-                <dt>¿Cuáles son los principales controles de una forma HTML5?</dt>
-                <dd>- input de tipo text, email, password, color</dd><br>
-                <dt>¿Qué tanto soporte HTML5 tiene el navegador que utilizas? Puedes utilizar la siguiente página para descubrirlo: http://html5test.com/ (Al responder la pregunta recuerda poner el navegador que utilizas)</dt>
-                <dd>- Uso Brave, y tiene 519 puntos de 555, lo cual es considerado que tiene buen soporte</dd><br>
-                <dt>Sobre el ciclo de vida y desarrollo de los sistemas de información: ¿Cuál es el ciclo de vida de los sistemas de información? ¿Cuál es el ciclo de desarrollo de sistemas de información?</dt>
-                <dd>- Ciclo de vida de los sistemas de información: planificación, analisis, diseño, implementacion, pruebas, despliege y mantenimiento </dd>
-                <dd>- Ciclo de desarrollo de sistemas de información: requerimientos, diseño, codificación, pruebas y despliege </dd><br>
-            </dl>
-            <h2 class="text-xl text-center text-[#703d56]">Preguntas CSS</h2>
-            <dl>
-                <dt>Como ingeniero de software ¿cuál es tu recomendación sobre el uso de !important en un CSS? </dt>
-                <dd>- Mi recomendación es tratar de no usarlo, ya que en un futuro cuando se hagan mas implementaciones en el código puede llegar a generar problemas</dd><br>
-                <dt>Si se pone una imagen de fondo en una página HTML, ¿por qué debe escogerse con cuidado?</dt>
-                <dd>- Puede estorbar la vista para la información relevante, si es una imagen pesada puede afectar el rendimiento de la pagina y problemas de compatibilidad entre distintos dispositivos</dd><br>
-                <dt>Como ingeniero de software, ¿cuál es tu recomendación al elegir las unidades de un propiedad de estilo entre %, px y pt?</dt>
-                <dd>- El % lo usaría para controlar lo visual para distintos dispositivos, el px para cosas que no quiero que cambien y el pt por lo investigado no es recomendable usarlos</dd><br>
-                <dt>¿Por qué el uso de una versión minimizada del CSS mejora el rendimiento del sitio?</dt>
-                <dd>- Porque se eliminan espacios, comentarios y salto de linea, por lo que el archivo se vuelve mas pequeño y consume menos ancho de banda</dd>
-            </dl>  
             <h2 class="text-xl text-center text-[#703d56]">Preguntas JavaScript</h2>
             <dl>
                 <dt>¿Qué diferencias y semejanzas hay entre Java y JavaScript?</dt>

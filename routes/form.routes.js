@@ -39,7 +39,7 @@ router.get('/password', (request, response) => {
     response.send(htmlHead + htmlValidador + htmlFooter)
 });
 
-router.post('/password', (request, response) => {
+router.post('/password', (request, response) => {    
     const password = request.body.pass1;
     fs.appendFileSync('contraseña.txt', `Password recibida: ${password}\n`);
     response.send("<h1>Password guardada correctamente</h1><a href='/auth/password'>Regresar</a>");
