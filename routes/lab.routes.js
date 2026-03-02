@@ -1,16 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-router.get('/completo', (request, response) => {
-    response.render('lab_completo', {titulo: "Laboratorio" });
-});
+const labController = require('../controllers/lab.controller');
 
-router.get('/preguntas-html', (request, response) => {
-    response.render('preguntashtml', {titulo: "Preguntass HTML" });
-});
+router.get('/completo', labController.get_completo);
 
-router.get('/preguntas-css', (request, response) => {
-    response.render('preguntascss', {titulo: "Preguntass CSS" });
-});
+router.get('/preguntas-html', labController.get_preguntas_html);
+
+router.get('/preguntas-css', labController.get_preguntas_css);
 
 module.exports = router;

@@ -2,20 +2,12 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs")
 
-const passwordsRecibidas = [];
+const formController = require('../controllers/form.controller');
 
-router.get('/password', (request, response) => {
-    response.render('password_form', {titulo: "Validador de Password", lista: passwordsRecibidas});
-});
+router.get('/password', formController.get_password);
 
-router.post('/password', (request, response) => {    
-    const password = request.body.pass1;
-    passwordsRecibidas.push(password);
-    response.redirect('/auth/password');
-});
+router.post('/password', formController.post_password);
 
-router.get('/status', (request, response) => {
-    response.send("<h1>Servidor en línea</h1><p>Módulo de formularios activo.</p>");
-});
+router.get('/status', formController.get_status);
 
 module.exports = router;
