@@ -1,6 +1,12 @@
 const express = require("express");
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -11,7 +17,7 @@ app.use('/lab', rutasLab);
 app.use('/auth', rutasForm);
 
 app.get('/', (request, response) => {
-    response.send('<h1>Lab 11</h1><p>Usa /lab/completo - /lab/preguntas-html /lab/preguntas-css o /auth/password - /auth/status</p>');
+    response.render('index', {titulo: "Inicio - Lab 12"});
 });
 
 app.use((request, response) => {

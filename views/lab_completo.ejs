@@ -1,0 +1,58 @@
+<%- include('includes/head.ejs') %>
+
+    <body>
+        <header class="font-sans text-center">
+            <h1 class="text-3xl font-bold">Este es el Laboratorio 1</h1>
+            <h4 class="text-gray-600">Manuel Valentino Ortiz Sánchez - A01712296 - A01712296@tec.mx</h4>
+        </header>
+        <hr class="my-4">
+        <main class="font-sans max-w-4xl mx-auto">
+            <a class="block mx-auto w-fit text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://www.w3schools.com/html/html_basic.asp" target="_blank"> Esto es un enlace</a>
+            <br>
+            <img id="imagenPresentacion" class="cursor-pointer mx-auto border-black rounded-lg my-[10px]" src="https://preview.redd.it/old-league-of-legends-art-as-posters-v0-0iw2kxwp1fee1.jpg?width=1080&crop=smart&auto=webp&s=076db3427c43651c6367ebfee566cb1b734a4734" alt="imagen de lol" height="420" width="640">
+            <p>Una de mis principales aficiones es jugar League of Legends, actualmente llevo jugando 6 años, me gusta que el juego dependa mucho de estrategias y no solo de habilidad, se necesita mucha comunicación en equipo para lograr ganar</p>
+            <hr class="my-4">
+            <h2 class="text-xl text-center text-[#703d56]">Preguntas JavaScript</h2>
+            <dl>
+                <dt>¿Qué diferencias y semejanzas hay entre Java y JavaScript?</dt>
+                <dd><strong>Semejanzas:</strong></dd>
+                <dd>- Ambos usan llaves y puntos y coma, permiten crear objeto, cuentan con una gran variedad de librerías</dd>
+                <dd><strong>Diferencias:</strong></dd>
+                <dd>- Java es un lenguaje tipado, mientras que JavaScript es dinámico; mientras que java tiene un uso más robusto para crear aplicaciones o sistemas, JavaScript se usa para darle interactividad a paginas web</dd><br>
+                <dt>¿Qué métodos tiene el objeto Date? (Menciona al menos 5*)</dt>
+                <dd>- getDate(), getFullYear(), getMonth(), getTime(), toISOString()</dd><br>
+                <dt>¿Qué métodos tienen los arreglos? (Menciona al menos 5*)</dt>
+                <dd>- push(), pop(), map(), filter(), forEach()</dd><br>
+                <dt>¿Cómo se declara una variable con alcance local dentro de una función?</dt>
+                <dd>- Se usa la palabra "let"</dd><br>
+                <dt>¿Qué implicaciones tiene utilizar variables globales dentro de funciones?</dt>
+                <dd>- Una funcion puede cambiar el valor de la variable, se puede confundir si se intenta usa con otra funcion que no sea la establecida, si la variable cambia, es dificil saber que funcion fue la que la cambio</dd>
+            </dl>
+            <h2 class="text-xl text-center text-[#703d56]">Preguntas Lab 6</h2>
+            <dl>
+                <dt>¿Por qué es una buena práctica usar JavaScript para checar que sean válidos los inputs de las formas antes de enviar los datos al servidor?</dt>
+                <dd>- Porque evita enviar peticiones innecesarias al servidor, si los datos estan mal, JavaScript detiene el envío</dd><br>
+                <dt>¿Cómo puedes saltarte la seguridad de validaciones hechas con JavaScript?</dt>
+                <dd>- Desactivando JavaScript desde el navegador, modificando las variables desde la consola</dd><br>
+                <dt>Si te puedes saltar la seguridad de las validaciones de JavaScript, entonces ¿por qué la primera pregunta dice que es una buena práctica?</dt>
+                <dd>- Porque la validación de JavaScript es simplemente para el usuario, la validacion del servidor es para la seguridad</dd>
+            </dl>
+            <hr class="my-4">
+        </main>
+        <hr class="my-4">
+        <footer class="font-sans">
+            <h2 class="text-xl text-center text-[#703d56]">Referencias</h2>
+            <p>freeCodeCamp. (2022, 26 enero). HTTP Request Methods  Get vs Put vs Post Explained with Code Examples. freeCodeCamp.org. https://www.freecodecamp.org/news/http-request-methods-explained/</p>
+            <p>W3Schools.com. (s.f.). https://www.w3schools.com/html/</p>
+            <p>Guerrero, A. C., & Guerrero, A. C. (2015, 20 julio). Ciclo de vida de un sistema de información. Gestiopolis. https://www.gestiopolis.com/ciclo-de-vida-de-un-sistema-de-informacion/</p>
+            <p>W3Schools.com. (s.f.-b). https://www.w3schools.com/html/html_tables.asp</p>
+            <p>Gemini. (2026). Asistente de Inteligencia Artificial de Google. Basado en el modelo Gemini 3 Flash.</p>
+            <p>Installing with Vite - Installation. (s. f.). Tailwind CSS. https://tailwindcss.com/docs/installation/using-vite</p>
+            <h2 class="text-xl text-center text-[#703d56]">Editor utilizado</h2>
+            <a class="text-[#be12b6] font-bold hover:text-gray-500 hover:text-lg" href="https://code.visualstudio.com/" target="_blank">Visual studio code</a>
+        </footer>
+        <hr class="my-4">
+        <script src="JS.js"></script>
+    </body>
+
+<%- include('includes/footer.ejs') %>
