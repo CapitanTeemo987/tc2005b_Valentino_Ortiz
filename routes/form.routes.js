@@ -10,7 +10,7 @@ router.get('/password', (request, response) => {
 
 router.post('/password', (request, response) => {    
     const password = request.body.pass1;
-    passwordsRecibidas.push(nuevaPassword);
+    passwordsRecibidas.push(password);
     response.redirect('/auth/password');
 });
 
