@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
-const Lab12Controller = require('./controllers/Lab12.controller');
+const Lab12Controller = require('./controllers/Lab14.controller');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
