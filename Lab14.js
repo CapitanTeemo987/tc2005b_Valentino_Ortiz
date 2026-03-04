@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
-const Lab12Controller = require('./controllers/Lab14.controller');
+const Lab14Controller = require('./controllers/Lab14.controller');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -28,7 +28,7 @@ app.use('/lab', rutasLab);
 app.use('/auth', rutasForm);
 app.use('/users', usersLog);
 
-app.get('/', Lab12Controller.get_main);
+app.get('/', Lab14Controller.get_main);
 
 app.use((request, response) => {
     response.status(404).send('<h1>Error 404: Esta página no existe</h1>');
