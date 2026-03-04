@@ -5,11 +5,11 @@
             <h1>Bienvenido, <%= username %></h1>
             <p>Has iniciado sesión correctamente</p>
             <p>Usa /lab/completo - /lab/preguntas-html /lab/preguntas-css o /auth/password - /auth/status</p>
-            <a href="/users/logout" class="button">Cerrar Sesión</a>
+            <a class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out shadow-md" href="/users/logout" class="button">Cerrar Sesión</a>
         <% } else { %>
-            <h1>Bienvenido al Lab 14</h1>
+            <h1 class="text-xl text-center text-[#703d56]">Bienvenido al Lab 14</h1><br>
             <p>Inicia sesión para acceder a todas las funciones</p>
-            <a href="/users/login" class="button">Ir al Login</a>
+            <a class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out shadow-md" href="/users/login" class="button">Ir al Login</a>
         <% } %>
     </main>
 
