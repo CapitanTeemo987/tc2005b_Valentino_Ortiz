@@ -6,5 +6,11 @@ exports.get_login = (request, response, next) => {
 
 exports.post_login = (request, response, next) => {
     request.session.username = request.body.username;
-    response.redirect('/auth/password');
+    response.redirect('/');
+};
+
+exports.logout = (request, response, next) => {
+    request.session.destroy(() => {
+        response.redirect('/users/login'); 
+    });
 };
