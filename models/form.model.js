@@ -1,3 +1,4 @@
+const db = require('../util/database')
 const passwordsRecibidas = [];
 
 module.exports = class form {
@@ -9,12 +10,18 @@ module.exports = class form {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        passwordsRecibidas.push(this.password);
+        return db.execute(
+            'INSERT INTO passwords (valor) VALUES (?)', 
+            [this.password]
+        );
     }
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return passwordsRecibidas;        
+        return db.execute('SELECT * FROM passwords ORDER BY fecha DESC');   
     }
 
+    static fetchOne(id) {
+        return db.execute('SELECT * FROM passwords WHERE id = ?', [id]);
+    }
 }

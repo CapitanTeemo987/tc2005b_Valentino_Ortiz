@@ -37,6 +37,28 @@
                 <dt>Si te puedes saltar la seguridad de las validaciones de JavaScript, entonces ¿por qué la primera pregunta dice que es una buena práctica?</dt>
                 <dd>- Porque la validación de JavaScript es simplemente para el usuario, la validacion del servidor es para la seguridad</dd>
             </dl>
+            <h2 class="text-xl text-center text-[#703d56]">Preguntas Lab 12</h2>
+            <dl>
+                <dt>¿Qué otros templating engines existen para Node.js?</dt>
+                <dd>- Además de EJS, que es el que estás utilizando actualmente, existen otros motores como Pug, que utiliza una sintaxis minimalista basada en espacios</dd>
+            </dl>
+            <h2 class="text-xl text-center text-[#703d56]">Preguntas Lab 13</h2>
+            <dl>
+                <dt>¿Qué beneficios encuentras en el estilo MVC?</dt>
+                <dd>- Facilita el mantenimiento del código al separar las responsabilidades de datos, interfaz y control</dd>
+                <dd>- Permite que el desarrollo sea más escalable, ya que puedes modificar la base de datos en el Modelo sin afectar directamente cómo se ve la vista</dd>
+                <dt>¿Encuentras alguna desventaja en el estilo arquitectónico MVC?</dt>
+                <dd>- La complejidad adicional que tiene, ya que requiere crear y gestionar muchos archivos y carpetas incluso para funciones pequeñas</dd>
+            </dl>
+            <h2 class="text-xl text-center text-[#703d56]">Preguntas Lab 17</h2>
+            <dl>
+                <dt>¿Qué ventajas tiene escribir el código SQL únicamente en la capa del modelo?</dt>
+                <dd>- Evita la duplicación de código, ya que diferentes controladores pueden llamar a la misma función del modelo para obtener los mismos datos</dd>
+                <dd>- Mejora la legibilidad del controlador, permitiendo que este se enfoque solo en la lógica de las peticiones y respuestas</dd>
+                <dt>¿Qué es SQL injection y cómo se puede prevenir?</dt>
+                <dd>- Es un método de ataque donde se inyecta código SQL malicioso en los campos de entrada para intentar leer o borrar datos privados de la base de datos</dd>
+                <dd>- La forma más efectiva de prevenirlo es mediante el uso del signo `?`, lo cual asegura que los valores enviados por el usuario nunca sean ejecutados como comandos por el servidor</dd>
+            </dl>
             <hr class="my-4">
         </main>
         <hr class="my-4">
