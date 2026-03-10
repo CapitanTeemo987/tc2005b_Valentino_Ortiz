@@ -20,9 +20,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.urlencoded({extended: false}));
 
+const csrf = require('csurf');
+const csrfProtection = csrf();
+
+app.use(csrfProtection); 
+
 const rutasLab = require('./routes/lab.routes');
 const rutasForm = require('./routes/form.routes');
-const usersLog = require('./routes/users.routes')
+const usersLog = require('./routes/users.routes');
 
 app.use('/lab', rutasLab);  
 app.use('/auth', rutasForm);

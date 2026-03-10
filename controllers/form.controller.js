@@ -5,7 +5,8 @@ exports.get_password = (request, response, next) => {
         response.render('password_form', {
             titulo: "Validador de Password",
             lista: rows, 
-            username: request.session.username || ''
+            username: request.session.username || '',
+            csrfToken: request.csrfToken(),
         });
     }).catch((error) => {next(error)});
 };
