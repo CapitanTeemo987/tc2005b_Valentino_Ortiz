@@ -1,0 +1,71 @@
+SELECT nombre 
+FROM Elenco E, Actor A
+Where A.Nombre = E.Nombre
+AND A.sexo = 'F' AND Titulo = 'Las brujas de Salem'
+
+
+SELECT Nombre 
+FROM Elenco WHERE Titulo = 'Las brujas de Salem'
+AND Nombre IN (SELECT nombre FROM Actor WHERE sexo = 'F')
+
+---------------------
+
+SELECT Nombre 
+FROM Elenco E, Película P
+WHERE E.titulo = P.titulo AND E.año = P.año AND P.nomestudio = 'MGM' AND P.año = 1995
+
+SELECT Nombre 
+FROM Elenco
+WHERE Titulo IN (SELECT Titulo FROM Pelicula WHERE año = 1995 AND nomestudio = 'MGM')
+
+
+---------------------
+
+SELECT titulo 
+FROM Pelicula P1, Pelicula P2
+WHERE P2.titulo =  “Lo que el viento se llevó” 
+AND P2.año = 1939
+AND P1.duracion > P2.duracion
+
+SELECT titulo 
+FROM Pelicula
+WHERE duración >
+(SELECT duración FROM Película WHERE título = 'Lo que el viento se llevó' AND año = 1939)
+
+---------------------
+
+SELECT prod.nombre, COUNT(idproductor) AS numPeliculas
+FROM Productor prod, Pelicula pel
+WHERE prod.idproductor = pel.idproductor
+AND numPeliculas > (SELECT COUNT(idproductor) AS numPeliculas
+FROM Productor prod, Pelicula 
+WHERE prod.idproductor = pel.idproductor
+AND prod.nombre = 'George Lucas')
+GROUP BY prod.nombre
+
+---------------------
+
+SELECT Pr.nombre
+FROM Productor Pr, Pelicula Pe, Elenco E
+WHERE Pr.idproductor = Pe.idproductor
+AND Pe.titulo = E.titulo
+AND Pe.año = E.año
+AND E.nombre = 'Sharon Stone'
+
+SELECT pr.nombre
+FROM Productor pr, Pelicula p
+WHERE pr.idproductor = p.idproductor 
+p.titulo IN
+(SELECT titulo FROM elenco WHERE nombre = 'Sharon Stone')
+
+---------------------
+SELECT titulo 
+FROM pelicula
+WHERE titulo IN (SELECT titulo, COUNT (*) FROM pelicula GROUP BY pelicula HAVING COUNT (*) > 1)
+
+SELECT titulo, COUNT (*) 
+FROM pelicula 
+GROUP BY titulo 
+HAVING COUNT (*) > 1
+
+

@@ -1,0 +1,37 @@
+----------------------------
+
+SELECT nombre, SUM(sueldo) as 'Total de ingresos'
+FROM Elenco
+GROUP BY nombre
+ORDER BY SUM(sueldo) DESC
+
+----------------------------
+
+SELECT SUM(presupuesto), nomestudio
+FROM pelicula
+WHERE año > 70 AND año < 80
+GROUP BY (nomestudio)
+ORDER BY SUM(presupuesto)
+
+----------------------------
+
+SELECT ele.nombre, AVG(ele.sueldo) as 'Sueldo promedio'
+FROM elenco ele, actor act
+WHERE ele.nombre = act.nombre
+AND act.nombre = 'm'
+GROUP BY ele.nombre
+HAVING AVG(ele.sueldo) > 5000000
+ORDER BY AVG(ele.sueldo)
+
+----------------------------
+
+SELECT titulo, año, MIN(presupuesto)
+FROM pelicula
+GROUP BY titulo
+
+----------------------------
+
+SELECT MAX(ele.sueldo), ele.nombre
+FROM elenco, actor
+WHERE ele.nombre = act.nombre
+AND act.sexo = 'f'
