@@ -19,9 +19,15 @@ exports.post_login = (request, response, next) => {
                 if(doMatch){
                     request.session.isLoggedIn = true;
                     request.session.username = request.body.username;
-                    return request.session.save(() => {
-                        return response.redirect('/');
-                    }); 
+                    return User.getPrivilegios(request.body.username).then(([privilegios, fieldData]) => {
+                        request.session.permisos = privilegios;
+                        return request.session.save(() => {
+                            return response.redirect('/');
+                        }); 
+                    }).catch((error) => {
+                        console.log(error);
+                        next(error);
+                    });
                 } else {
                     request.session.error = "Usario y/o contraseña no coinciden";
                     return response.redirect('/users/login');
@@ -72,3 +78,4 @@ exports.post_signup = (request, response, next) =>{
         });
     }
 };
+

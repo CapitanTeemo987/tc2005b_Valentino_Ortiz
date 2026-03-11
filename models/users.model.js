@@ -14,7 +14,11 @@ module.exports = class User {
             return db.execute(
                 "INSERT INTO usuario(username, nombre, password) VALUES (?, ?, ?)" ,
                 [this.username, this.nombre, password_cifrado]
+            ).then(() => {
+                return db.execute("INSERT INTO tiene(id_usuario, id_rol) VALUES (?, ?)",
+                [this.username, 3]
             );
+            });
         }).catch((error) => {
             console.log(error);
             throw error;
@@ -25,4 +29,16 @@ module.exports = class User {
         return db.execute("SELECT * FROM usuario WHERE username = ?", [username]);
     }
 
+    static getPrivilegios(username) {
+    return db.execute(
+        `SELECT p.descripcion_privilegios 
+         FROM usuario u, tiene t, roles r, posee po, privilegios p
+         WHERE u.username = t.id_usuario 
+         AND t.id_rol = r.id_rol 
+         AND r.id_rol = po.id_rol 
+         AND po.id_privilegio = p.id_privilegios 
+         AND u.username = ?`, 
+        [username]
+    );
+}
 }

@@ -1,9 +1,8 @@
 exports.get_main = (request, response, next) => {
     response.render('index', {
-        titulo: "Inicio - Lab 18", 
+        titulo: "Inicio - Lab 14", 
         username: request.session.username || '',
+        permisos: request.session.permisos || [], 
         csrfToken: request.csrfToken(),
     });
 };
-
-
