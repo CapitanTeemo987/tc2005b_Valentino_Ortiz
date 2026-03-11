@@ -4,7 +4,7 @@
   "description": "laboratorio lol",
   "main": "intro.js",
   "scripts": {
-    "start": "node --watch Lab14.js",
+    "start": "node --watch Lab18.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
