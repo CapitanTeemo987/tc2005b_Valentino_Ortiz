@@ -1,0 +1,251 @@
+Materiales(Clave,Descripcion,Costo)
+Proveedores(RFC,RazonSocial)
+Proyectos(Numero,Denominacion)
+Entregan(Clave,RFC,Numero,Fecha,Cantidad)
+
+Algebra relacional.
+entregan JN materiales
+
+------------------------------------------------------------
+
+SQL
+select * from materiales,entregan
+where materiales.clave = entregan.clave
+
+Si algún material no ha se ha entregado ¿Aparecería en el resultado de esta consulta?
+- No, ya que se hizo un join con la tabla entregan, y los que no se han entregado no tienen porque tener la clave en entregan
+
+------------------------------------------------------------
+
+Unión (se ilustra junto con selección)
+
+Algebra relacional.
+SL{clave=1450}(entregan) UN SL{clave=1300}(entregan)
+
+SQL
+(select * from entregan where clave=1450)
+union
+(select * from entregan where clave=1300)
+
+¿Cuál sería una consulta que obtuviera el mismo resultado sin usar el operador Unión? Compruébalo.
+- SELECT * FROM entregan WHERE clave = 1450 OR clave = 1300, me da los mismos resultados
+
+------------------------------------------------------------
+
+Diferencia (se ilustra con selección )
+
+Algebra relacional.
+entregan - SL{clave=1000}(entregan)
+
+SQL
+(select * from entregan)
+minus
+(select * from entregan where clave=1000)
+
+Nuevamente, "minus" es una palabra reservada que no está definida en SQL Server, define una consulta que regrese el mismo resultado.
+- usando subconsultas la hice asi: SELECT * FROM entregan WHERE clave NOT IN (SELECT clave FROM entregan WHERE clave = 1000) o tambien se podría usar SELECT * FROM entregan WHERE clave <> 1000
+
+------------------------------------------------------------
+
+Producto cartesiano
+
+Algebra relacional.
+entregan X materiales
+
+SQL
+select * from entregan,materiales
+
+¿Cómo está definido el número de tuplas de este resultado en términos del número de tuplas de entregan y de materiales?
+- El numero de filas de entregan * el numero de filas de materiales
+
+------------------------------------------------------------
+
+Construcción de consultas a partir de una especificación
+
+Plantea ahora una consulta para obtener las descripciones de los materiales entregados en el año 2000.
+- SELECT Descripcion, fecha 
+FROM materiales M JOIN entregan E on M.clave = E.clave  
+WHERE YEAR(E.fecha) = 2000;
+
+Recuerda que la fecha puede indicarse como '01-JAN-2000' o '01/01/00'.
+
+Importante: Recuerda que cuando vayas a trabajar con fechas, antes de que realices tus consultas debes ejecutar la instrucción "set dateformat dmy". Basta con que la ejecutes una sola vez para que el manejador sepa que vas a trabajar con ese formato de fechas.
+
+¿Por qué aparecen varias veces algunas descripciones de material?
+- Porque el mismo producto puede tener diferentes fechas de entregas
+
+------------------------------------------------------------
+
+Uso del calificador distinct
+
+En el resultado anterior, observamos que una misma descripción de material aparece varias veces.
+
+Agrega la palabra distinct inmediatamente después de la palabra select a la consulta que planteaste antes.
+
+¿Qué resultado obtienes en esta ocasión?
+- Obtuve cada producto una vez
+
+------------------------------------------------------------
+
+Ordenamientos.
+
+Si al final de una sentencia select se agrega la cláusula
+
+order by campo [desc] [,campo [desc] ...]
+
+donde las partes encerradas entre corchetes son opcionales (los corchetes no forman parte de la sintaxis), los puntos suspensivos indican que pueden incluirse varios campos y la palabra desc se refiere a descendente. Esta cláusula permite presentar los resultados en un orden específico.
+
+Obtén los números y denominaciones de los proyectos con las fechas y cantidades de sus entregas, ordenadas por número de proyecto, presentando las fechas de la más reciente a la más antigua.
+- SELECT P.Numero, P.Denominacion, E.Fecha, E.Cantidad
+FROM proyectos P JOIN entregan E ON P.numero = E.numero
+ORDER BY P.numero ASC, E.fecha DESC
+
+------------------------------------------------------------
+
+
+También contamos con el operador comodín (%), que coincide con cualquier cadena que tenga cero o más caracteres. Este puede usarse tanto de prefijo como sufijo.
+
+SELECT * FROM productos where Descripcion LIKE 'Si%'
+
+¿Qué resultado obtienes?
+- Las descripciones que empiecen son 'Si'
+Explica que hace el símbolo '%'.
+- Ignora los caracteres siguientes
+¿Qué sucede si la consulta fuera : LIKE 'Si' ?
+- Solo devuelve las descripciones que sean exactamente 'Si' 
+¿Qué resultado obtienes?
+- Los valores que solo sean Si
+Explica a qué se debe este comportamiento.
+- Cuando no escribimos '%' o '-' en un Like, se comporota como un comparador 
+
+------------------------------------------------------------
+
+Otro operador de cadenas es el de concatenación, (+, +=) este operador concatena dos o más cadenas de caracteres.
+Su sintaxis es : Expresión + Expresión.
+Un ejemplo de su uso, puede ser: Un ejemplo de su uso, puede ser:
+SELECT (Apellido + ', ' + Nombre) as Nombre FROM Personas;
+
+DECLARE @foo varchar(40);
+DECLARE @bar varchar(40);
+SET @foo = '¿Que resultado';
+SET @bar = ' ¿¿¿??? '
+SET @foo += ' obtienes?';
+PRINT @foo + @bar;
+
+¿Qué resultado obtienes de ejecutar el siguiente código?
+- ¿Que resultado obtienes? ¿¿¿???
+¿Para qué sirve DECLARE?
+- Se utiliza para crear una variable local en el script
+¿Cuál es la función de @foo?
+- Es una variable de usuario que actúa como un contenedor temporal de datos
+¿Que realiza el operador SET?
+- Asigna un valor específico a una variable previamente declarada.
+
+------------------------------------------------------------
+
+[ ] - Busca coincidencia dentro de un intervalo o conjunto dado. Estos caracteres se pueden utilizar para buscar coincidencias de patrones como sucede con LIKE.
+
+[^] - En contra parte, este operador coincide con cualquier caracter que no se encuentre dentro del intervalo o del conjunto especificado.
+
+_ - El operador _ o guion bajo, se utiliza para coincidir con un caracter de una comparación de cadenas.
+
+Ahora explica el comportamiento, función y resultado de cada una de las siguientes consultas:
+
+SELECT RFC FROM Entregan WHERE RFC LIKE '[A-D]%';
+- Busca registros que el RFC comience con cualquier letra entre la 'A' y la 'D'
+SELECT RFC FROM Entregan WHERE RFC LIKE '[^A]%';
+- Busca registros que el RFC no comience con la letra 'A'
+SELECT Numero FROM Entregan WHERE Numero LIKE '___6';
+- Busca valores que tengan exactamente 4 caracteres y el último carácter sea el número '6'
+
+------------------------------------------------------------
+
+
+SELECT Clave,RFC,Numero,Fecha,Cantidad
+FROM Entregan
+WHERE Numero Between 5000 and 5010;
+
+¿Cómo filtrarías rangos de fechas?
+- WHERE Fecha BETWEEN '2023-01-01' AND '2023-12-31'
+
+------------------------------------------------------------
+
+SELECT RFC,Cantidad, Fecha,Numero
+FROM [Entregan]
+WHERE [Numero] Between 5000 and 5010 AND
+Exists ( SELECT [RFC]
+FROM [Proveedores]
+WHERE RazonSocial LIKE 'La%' and [Entregan].[RFC] = [Proveedores].[RFC] )
+
+¿Qué hace la consulta?
+- Selecciona los datos de las entregas solo si el proveedor asociado tiene una Razón Social que comienza con "La"
+¿Qué función tiene el paréntesis ( ) después de EXISTS?
+- Sirve para ver si tiene datos la subconsulta
+
+SELECT RFC, Cantidad, Fecha, Numero
+FROM Entregan
+WHERE Numero BETWEEN 5000 AND 5010 
+AND RFC IN (SELECT RFC FROM Proveedores WHERE RazonSocial LIKE 'La%');
+
+SELECT RFC, Cantidad, Fecha, Numero
+FROM Entregan
+WHERE Numero BETWEEN 5000 AND 5010 
+AND RFC NOT IN (SELECT RFC FROM Proveedores WHERE RazonSocial NOT LIKE 'La%');
+
+------------------------------------------------------------
+
+¿Qué hace la siguiente sentencia? Explica por qué.
+- Devuelve únicamente las primeras 2 filas de la tabla Proyectos
+
+SELECT TOP 2 * FROM Proyectos
+
+¿Qué sucede con la siguiente consulta? Explica por qué.
+- Da error si no tenemos definido numero
+
+SELECT TOP Numero FROM Proyectos
+
+------------------------------------------------------------
+
+
+Agrega a la tabla materiales la columna PorcentajeImpuesto con la instrucción:
+ALTER TABLE materiales ADD PorcentajeImpuesto NUMERIC(6,2);
+A fin de que los materiales tengan un impuesto, les asignaremos impuestos ficticios basados en sus claves con la instrucción:
+UPDATE materiales SET PorcentajeImpuesto = 2*clave/1000;
+esto es, a cada material se le asignará un impuesto igual al doble de su clave dividida entre diez.
+
+Revisa la tabla de materiales para que compruebes lo que hicimos anteriormente.
+
+¿Qué consulta usarías para obtener el importe de las entregas es decir, el total en dinero de lo entregado, basado en la cantidad de la entrega y el precio del material y el impuesto asignado?
+
+SELECT (E.Cantidad * M.Precio) * (1 + (M.PorcentajeImpuesto / 100)) as ImporteTotal
+FROM Entregan E
+JOIN Materiales M ON E.Clave = M.Clave;
+
+------------------------------------------------------------
+
+SELECT M.Clave, M.Descripcion FROM Materiales M
+JOIN Entregan E ON M.Clave = E.Clave
+JOIN Proyectos P ON E.Numero = P.Numero
+WHERE P.Denominacion = 'México sin ti no estamos completos';
+
+SELECT M.Clave, M.Descripcion FROM Materiales M
+JOIN Entregan E ON M.Clave = E.Clave
+JOIN Proveedores Pr ON E.RFC = Pr.RFC
+WHERE Pr.RazonSocial = 'Acme tools';
+
+SELECT RFC FROM Entregan 
+WHERE YEAR(Fecha) = 2000 
+GROUP BY RFC HAVING AVG(Cantidad) >= 300;
+
+SELECT Descripcion FROM Materiales WHERE Descripcion LIKE '%ub%';
+
+SELECT Pj.Denominacion, Pr.RFC, Pr.RazonSocial
+FROM Proveedores Pr
+JOIN Entregan E ON Pr.RFC = E.RFC
+JOIN Proyectos Pj ON E.Numero = Pj.Numero
+WHERE Pj.Denominacion = 'Televisa en acción'
+AND Pr.RFC NOT IN (
+    SELECT E2.RFC FROM Entregan E2 
+    JOIN Proyectos Pj2 ON E2.Numero = Pj2.Numero 
+    WHERE Pj2.Denominacion = 'Educando en Coahuila'
+);
