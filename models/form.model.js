@@ -11,7 +11,7 @@ module.exports = class form {
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
         return db.execute(
-            'INSERT INTO passwords (valor) VALUES (?)', 
+            'CALL agregarPasswordCatalogo(?)', 
             [this.password]
         );
     }

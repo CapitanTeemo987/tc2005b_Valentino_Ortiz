@@ -20,7 +20,8 @@ exports.post_login = (request, response, next) => {
                     request.session.isLoggedIn = true;
                     request.session.username = request.body.username;
                     return User.getPrivilegios(request.body.username).then(([privilegios, fieldData]) => {
-                        request.session.permisos = privilegios;
+                        request.session.permisos = privilegios[0];
+                        console.log(request.session.permisos);
                         return request.session.save(() => {
                             return response.redirect('/');
                         }); 
