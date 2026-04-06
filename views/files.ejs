@@ -1,0 +1,21 @@
+<%- include('includes/head.ejs') %>
+
+<body>
+    <form action="/files/archivo" method="POST" enctype="multipart/form-data">
+        <label for="files">Selecciona una imagen:</label><br>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <input type="file" name="archivo" id="archivo" accept=".png,.jpg,.jpeg"><br><br>
+        <input type="submit" value="Subir">
+    </form>
+
+    <% if (rutaImagen) { %>
+        <h2>Imagen subida correctamente</h2>
+        <img src="/<%= rutaImagen %>" alt="Imagen subida" style="max-width: 400px;">
+    <% } %>
+
+    <% if (error) { %>
+        <p style="color:red;"><%= error %></p>
+    <% } %>
+</body>
+
+<%- include('includes/footer.ejs') %>

@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const path = require('path');
+const multer = require('multer');
 const app = express();
 
 const Lab18Controller = require('./controllers/Lab18.controller');
@@ -17,8 +18,29 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(bodyParser.urlencoded({extended: false}));
+
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callback(null, 'uploads');
+    },
+    filename: (request, file, callback) => {
+        callback(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname);
+    },
+});
+
+const fileFilter = (request, file, callback) => {
+    if (file.mimetype == 'image/png' || 
+        file.mimetype == 'image/jpg' ||
+        file.mimetype == 'image/jpeg' ) {
+            callback(null, true);
+    } else {
+            callback(null, false);
+    }
+};
+
+app.use(multer({ storage: fileStorage, fileFilter: fileFilter }).single('archivo')); 
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const csrf = require('csurf');
 const csrfProtection = csrf();
@@ -28,10 +50,13 @@ app.use(csrfProtection);
 const rutasLab = require('./routes/lab.routes');
 const rutasForm = require('./routes/form.routes');
 const usersLog = require('./routes/users.routes');
+const rutasFiles = require('./routes/files.routes');
+
 
 app.use('/lab', rutasLab);  
 app.use('/auth', rutasForm);
 app.use('/users', usersLog);
+app.use('/files', rutasFiles);
 
 app.get('/', Lab18Controller.get_main);
 
