@@ -1,0 +1,33 @@
+<%- include('includes/head.ejs') %>
+
+<section class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
+    <h2 class="text-2xl font-bold text-[#703d56] mb-6 text-center">Perfil</h2>
+    
+    <% if (data) { %>
+        <div class="flex items-center space-x-6 p-6 bg-gray-50 rounded-xl border border-gray-200">
+            <div class="relative">
+                <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/profileicon/<%= data.profileIconId %>.png" 
+                     alt="Icono" class="w-24 h-24 rounded-full border-4 border-[#be12b6]">
+                <span class="absolute bottom-0 right-0 bg-black text-white text-xs px-2 py-1 rounded-full">
+                    Nivel <%= data.summonerLevel %>
+                </span>
+            </div>
+
+            <div>
+                <h1 class="text-3xl font-black text-gray-800"><%= data.name %></h1>
+                <p class="text-gray-500 font-mono">ID: <%= data.id %></p>
+                <p class="text-sm text-gray-400">Revisado el: <%= new Date().toLocaleDateString() %></p>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="bg-red-100 text-red-700 p-4 rounded-lg">
+            No se encontró información del invocador.
+        </div>
+    <% } %>
+
+    <div class="mt-8 text-center">
+        <a href="/" class="bg-[#703d56] text-white px-6 py-2 rounded-lg hover:bg-[#be12b6] transition">Regresar</a>
+    </div>
+</section>
+
+<%- include('includes/footer.ejs') %>

@@ -52,12 +52,14 @@ const rutasLab = require('./routes/lab.routes');
 const rutasForm = require('./routes/form.routes');
 const usersLog = require('./routes/users.routes');
 const rutasFiles = require('./routes/files.routes');
+const rutasRiot = require('./routes/riot.routes');
 
 
 app.use('/lab', rutasLab);  
 app.use('/auth', rutasForm);
 app.use('/users', usersLog);
 app.use('/files', rutasFiles);
+app.use('/riot', rutasRiot);
 
 app.get('/', Lab18Controller.get_main);
 
