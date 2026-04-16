@@ -24,4 +24,8 @@ module.exports = class form {
     static fetchOne(id) {
         return db.execute('SELECT * FROM passwords WHERE id = ?', [id]);
     }
+ 
+    static fetchLast() {
+    return db.execute('SELECT * FROM passwords WHERE id = LAST_INSERT_ID()');
+    }
 }

@@ -16,10 +16,20 @@ exports.post_password = (request, response, next) => {
     const miPassword = new Form(password);
 
     miPassword.save().then(() => {
+        return Form.fetchLast();
+    }).then(([rows]) => {
+        const nuevo = rows[0];
         response.setHeader('Set-Cookie', `ultima_password=${password}; HttpOnly; Max-Age=3600`);
-        response.redirect('/auth/password');
+        response.status(200).json({
+            success: true,
+            message: 'Contraseña guardada',
+            nuevo: {
+                id: nuevo.id,
+                valor: nuevo.valor,
+                fecha: nuevo.fecha
+            }
+        });    
     }).catch((error) => {next(error)});
-    
 };
 
 exports.get_status = (request, response, next) => {
