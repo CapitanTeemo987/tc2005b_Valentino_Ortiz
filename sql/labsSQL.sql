@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2026 at 06:55 PM
+-- Generation Time: Apr 20, 2026 at 03:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `lab17`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `agregarPasswordCatalogo` (IN `p_nuevo_valor` VARCHAR(255))   BEGIN
+    INSERT INTO passwords (valor) 
+    VALUES (p_nuevo_valor);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerPrivilegiosUsuario` (IN `p_username` VARCHAR(50))   BEGIN
+    SELECT p.descripcion_privilegios
+    FROM usuario u
+    JOIN tiene t ON u.username = t.id_usuario
+    JOIN roles r ON t.id_rol = r.id_rol
+    JOIN posee po ON r.id_rol = po.id_rol
+    JOIN privilegios p ON po.id_privilegio = p.id_privilegios
+    WHERE u.username = p_username;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `registrarUsuarioConRol` (IN `p_username` VARCHAR(50), IN `p_nombre` VARCHAR(50), IN `p_password` VARCHAR(100), IN `p_id_rol` INT)   BEGIN
+    INSERT INTO usuario (username, nombre, password) 
+    VALUES (p_username, p_nombre, p_password);
+    
+    INSERT INTO tiene (id_usuario, id_rol) 
+    VALUES (p_username, p_id_rol);
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -43,7 +72,33 @@ INSERT INTO `passwords` (`id`, `valor`, `fecha`) VALUES
 (3, 'prueba´', '2026-03-07 22:41:24'),
 (4, 'ultima prueba', '2026-03-07 23:12:59'),
 (5, 'prueba con login', '2026-03-10 21:35:12'),
-(6, 'prueba', '2026-03-10 21:37:49');
+(6, 'prueba', '2026-03-10 21:37:49'),
+(7, 'prueba', '2026-03-11 19:01:46'),
+(8, 'caskncnassac', '2026-03-24 16:24:15'),
+(9, 'dasdasdas', '2026-03-24 16:49:13'),
+(10, 'nuevo con procedure', '2026-03-24 16:49:16'),
+(11, 'sadasd', '2026-04-16 16:19:38'),
+(12, 'dsadsa', '2026-04-16 16:21:07'),
+(13, 'prueba ajax', '2026-04-16 16:22:20'),
+(14, 'prueba ajax', '2026-04-16 16:30:10'),
+(15, 'asdada', '2026-04-16 16:31:16'),
+(16, '', '2026-04-16 16:31:17'),
+(17, '', '2026-04-16 16:31:17'),
+(18, '', '2026-04-16 16:31:18'),
+(19, '', '2026-04-16 16:31:18');
+
+--
+-- Triggers `passwords`
+--
+DELIMITER $$
+CREATE TRIGGER `antes_de_insertar_password` BEFORE INSERT ON `passwords` FOR EACH ROW BEGIN
+    IF NEW.valor = '' THEN
+        SIGNAL SQLSTATE '45000' 
+        SET MESSAGE_TEXT = 'Error: La contraseña no puede estar vacía.';
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -124,6 +179,8 @@ CREATE TABLE `tiene` (
 
 INSERT INTO `tiene` (`id_usuario`, `id_rol`, `created_at`) VALUES
 ('admin', 1, '2026-03-11 17:43:45'),
+('procedure', 3, '2026-03-24 16:28:33'),
+('prueba_rol_automatico', 3, '2026-03-11 18:44:12'),
 ('valentino123', 3, '2026-03-11 17:43:45');
 
 -- --------------------------------------------------------
@@ -145,8 +202,24 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`username`, `nombre`, `password`) VALUES
 ('admin', 'admin', '$2b$12$nuHUBzD7pmgw2sE6qfa58ey88pY2pcxAlQ7/dU8Wo88VylTAoz/c6'),
 ('Manuel', 'prueba2', '$2b$12$JZUluVf2yhp9mey2/RM4MOBxuUMlSQu7ZcdAUNDgUgIPuLxxst1he'),
+('procedure', 'procedure', '$2b$12$WBE8r303hdH.Jge2TG7sMefkRWdwyorZIBIDn/HQrXIroIoBtq71e'),
 ('prueba3', 'prueba3', '$2b$12$/lRxQXAM8NLZUq1ZQmB0Eur5Ndfr0AHxTYw41skegrTsH/MUUPShW'),
+('prueba_rol_automatico', 'prueba_rol_automatico', '$2b$12$pQJuFpfM9ZLQwG6EBLz3H.Mf5FmemH9kOlxA3xLh1nRZFDNULIcQ2'),
 ('valentino123', 'Valentino', '$2b$12$1CMJDMgQd.GQCtcUGX9EYuUQT0terzCsaya5z4pxaE37VSL92GyRi');
+
+--
+-- Triggers `usuario`
+--
+DELIMITER $$
+CREATE TRIGGER `antes_de_insertar_usuario` BEFORE INSERT ON `usuario` FOR EACH ROW BEGIN
+    -- Convierte el nombre a mayúsculas automáticamente
+    SET NEW.nombre = UPPER(NEW.nombre);
+    
+    -- Elimina espacios en blanco accidentales al inicio o final del username
+    SET NEW.username = TRIM(NEW.username);
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -198,7 +271,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `privilegios`
