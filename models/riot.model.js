@@ -21,4 +21,28 @@ module.exports = class RiotModel {
             throw error;
         }
     }
+
+    static async fetchRecentMatches(puuid, count = 3) {
+        try {
+            const idsUrl = `https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=${count}`;
+            const idsRes = await axios.get(idsUrl, {
+                headers: { "X-Riot-Token": API_KEY }
+            });
+
+            const matchIds = idsRes.data;
+            const matches = [];
+
+            for (const matchId of matchIds) {
+                const matchUrl = `https://americas.api.riotgames.com/lol/match/v5/matches/${matchId}`;
+                const matchRes = await axios.get(matchUrl, {
+                    headers: { "X-Riot-Token": API_KEY }
+                });
+                matches.push(matchRes.data);
+            }
+
+            return matches;
+        } catch (error) {
+            throw error;
+        }
+    }
 };

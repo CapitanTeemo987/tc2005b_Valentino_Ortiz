@@ -5,6 +5,9 @@ exports.get_summoner = (request, response, next) => {
     response.render('riot_views', {
         titulo: "Estadísticas Riot",
         data: null,
+        matches: null,
+        wins: 0,
+        losses: 0,
         error: null,
         csrfToken: request.csrfToken(),
     });
@@ -16,6 +19,9 @@ exports.post_summoner = (request, response, next) => {
         return response.render('riot_views', {
             titulo: "Estadísticas Riot",
             data: null,
+            matches: null,
+            wins: 0,
+            losses: 0,
             error: "Formato de nombre de usuario inválido. Use gameName#tagLine (ej: valentinof31#LAN)",
             csrfToken: request.csrfToken(),
         });
@@ -26,9 +32,29 @@ exports.post_summoner = (request, response, next) => {
 
     Riot.fetchSummoner(platform, gameName, tagLine)
         .then(res => {
+            const summonerData = res.data;
+            const puuid = summonerData.puuid;
+            return Riot.fetchRecentMatches(puuid, 5)
+                .then(matches => ({ summonerData, matches }))
+                .catch(() => ({ summonerData, matches: null }));
+        })
+        .then(({ summonerData, matches }) => {
+            let wins = 0, losses = 0;
+            if (matches) {
+                matches.forEach(match => {
+                    const participant = match.info.participants.find(p => p.puuid === summonerData.puuid);
+                    if (participant) {
+                        if (participant.win) wins++;
+                        else losses++;
+                    }
+                });
+            }
             response.render('riot_views', {
                 titulo: "Estadísticas Riot",
-                data: res.data,
+                data: summonerData,
+                matches: matches,
+                wins: wins,
+                losses: losses,
                 error: null,
                 csrfToken: request.csrfToken(),
             });
@@ -44,6 +70,9 @@ exports.post_summoner = (request, response, next) => {
             response.render('riot_views', {
                 titulo: "Estadísticas Riot",
                 data: null,
+                matches: null,
+                wins: 0,
+                losses: 0,
                 error: errorMessage,
                 csrfToken: request.csrfToken(),
             });

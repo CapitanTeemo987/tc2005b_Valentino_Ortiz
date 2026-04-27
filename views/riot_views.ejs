@@ -15,10 +15,40 @@
 
             <div>
                 <h1 class="text-3xl font-black text-gray-800"><%= data.name %></h1>
-                <p class="text-gray-500 font-mono">ID: <%= data.id %></p>
+                <p class="text-gray-500 font-mono">ID: <%= data.id || 'N/A' %></p>
                 <p class="text-sm text-gray-400">Revisado el: <%= new Date().toLocaleDateString() %></p>
             </div>
         </div>
+
+        <% if (matches && matches.length > 0) { %>
+        <div class="mt-8">
+            <h3 class="text-xl font-bold text-[#703d56] mb-4">Últimas 3 Partidas</h3>
+            <% matches.forEach(match => { %>
+                <% const participant = match.info.participants.find(p => p.puuid === data.puuid); %>
+                <% if (participant) { %>
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-4 flex items-center space-x-4">
+                    <img src="https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/<%= participant.championName %>.png" 
+                         alt="<%= participant.championName %>" class="w-16 h-16 rounded-full border-2 <%= participant.win ? 'border-green-500' : 'border-red-500' %>">
+                    <div>
+                        <p class="font-semibold"><%= participant.championName %></p>
+                        <p class="<%= participant.win ? 'text-green-600' : 'text-red-600' %> font-bold"><%= participant.win ? 'Victoria' : 'Derrota' %></p>
+                        <p class="text-sm text-gray-600">KDA: <%= participant.kills %>/<%= participant.deaths %>/<%= participant.assists %></p>
+                        <p class="text-sm text-gray-600">Modo: <%= match.info.gameMode %> | Duración: <%= Math.floor(match.info.gameDuration / 60) %>:<%= (match.info.gameDuration % 60).toString().padStart(2, '0') %></p>
+                    </div>
+                </div>
+                <% } %>
+            <% }); %>
+        </div>
+        <% } %>
+
+        <% if (wins + losses > 0) { %>
+        <div class="mt-8">
+            <h3 class="text-xl font-bold text-[#703d56] mb-4">Estadísticas de Partidas Recientes</h3>
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <canvas id="winLossChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+        <% } %>
     <% } else { %>
         <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
             <h3 class="text-lg font-semibold text-gray-800 mb-4">Buscar Invocador</h3>
