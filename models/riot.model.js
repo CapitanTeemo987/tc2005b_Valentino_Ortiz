@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_KEY = 'RGAPI-15a572ec-1b78-431d-8907-5e75aa049c01';
+const API_KEY = 'RGAPI-7b621041-6640-4d7e-9f48-eca6700ef451';
 
 module.exports = class RiotModel {
     static async fetchSummoner(platform, gameName, tagLine) {
